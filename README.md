@@ -10,7 +10,6 @@ The **IT Support Portal** is a web-based application designed to help IT teams m
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
