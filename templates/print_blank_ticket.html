@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Ticket - IT Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='print_ticket.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/website_logo.png') }}">
+
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-logo {
+            flex: 1;
+            text-align: center;
+        }
+        .header-title {
+            flex: 2;
+            text-align: center;
+        }
+        .header-title h1 {
+            margin: 0;
+        }
+    </style>
+
+
+</head>
+<body onload="window.print()">
+    <div class="container">
+        <header class="header-container">
+            <!-- <h1 style="text-align: left;">Maintenance Request Form <span class="title">&copy; Petrobakr Petroleum Company</span></h1> -->
+            <div class="header-logo">
+                <!-- <img src="{{ url_for('static', filename='img/company_logo.png') }}" alt="Company Logo" width="100"> -->
+            </div>
+            <div class="header-title">
+                <h1>Maintenance Request Form <span class="title">&copy;Company Name</span></h1>
+            </div>
+        </header>
+        <main>
+                <section>
+                    <h2>Main Data</h2>
+                    <div class="detail-box">
+                        <div class="detail"><strong>Name of Applicant:</strong> .....................................................................................................................</div>
+                        <div class="detail"><strong>Job Title:</strong> ......................................................................................................................................</div>
+                        <div class="detail"><strong>Phone/Ext:</strong>....................................................................................................................................</div>
+                        <div class="detail"><strong>Date:</strong> .............................................................................................................................................</div>
+                        <div class="detail"><strong>Department:</strong> .................................................................................................................................</div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Problem Information</h2>
+                    <div class="detail-box">
+                        <div class="detail">
+                            <strong>Location:</strong> .......................................................................................................................................
+                        </div>
+                        <div class="detail">
+                            <strong>Problem Type:</strong>
+                            <span class="radio-group">
+                                <span class="radio-item">
+                                    <input type="radio" id="software" name="problem_type">
+                                    <label for="software">Software</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" id="pc" name="problem_type">
+                                    <label for="pc">PC</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" id="network" name="problem_type">
+                                    <label for="network">Network</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" id="printer" name="problem_type">
+                                    <label for="printer">Printer</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" id="ip-phone" name="problem_type">
+                                    <label for="ip-phone">IP Phone</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" id="tetra" name="problem_type">
+                                    <label for="tetra">Tetra</label>
+                                </span>
+                                <span class="radio-item">
+                                    <input type="radio" id="vhf" name="problem_type">
+                                    <label for="vhf">VHF</label>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="detail"><strong>Description of the Problem:</strong> .......................................................................................................</div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Manager Field Notes</h2>
+                    <div class="detail-box">
+                        <div class="detail"><strong>Priority:</strong> &emsp;A&emsp;&emsp;&emsp;&emsp; B &emsp;&emsp;&emsp;&emsp;C</div>
+                        <div class="detail"><strong>Signature:</strong> ......................................&emsp;&emsp;&emsp;&emsp;<strong>comment:</strong> ............................................................</</div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Report of the Technical Support</h2>
+                    <div class="detail-box">
+                        <div class="detail"><strong>Report:</strong> .........................................................................................................................................</div>
+                        <div class="detail"><strong>Signature:</strong> ......................................&emsp;&emsp;&emsp;&emsp;<strong>comment:</strong> ............................................................</</div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Status</h2>
+                    <div class="detail-box">
+                        <div class="detail"><strong>Status:</strong> ...........................................</div>
+                        <div class="detail"><strong>Notes:</strong> ............................................................................................................................................</div>
+                    </div>
+                </section>
+                <section class="signatures">
+                    <div class="signature-box">
+                        <div class="signature">
+                            <strong>Applicant's Signature:</strong> .......................<br>
+                            <strong>Date:</strong> ....................................................
+                        </div>
+                        <div class="signature">
+                            <strong>IT Signature:</strong> .......................................<br>
+                            <strong>Date:</strong> ....................................................
+                        </div>
+                    </div>
+                </section>
+        </main>
+    </div>
+    <!-- <footer>
+        <p>&copy;Petrobakr Petroleum Company</p>
+    </footer> -->
+</body>
+</html>

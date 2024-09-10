@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Created - IT Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/website_logo.png') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ticket Created Successfully</h1>
+        </header>
+        <main>
+            <section style="text-align: center;">
+                <p>Your ticket has been created successfully. Please save your ticket ID for future reference:</p>
+                <h2>Ticket ID: {{ ticket_id }}</h2>
+                <a href="{{ url_for('home') }}" class="button">Back to Home</a>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 IT Support Portal</p>
+        </footer>
+    </div>
+</body>
+</html>

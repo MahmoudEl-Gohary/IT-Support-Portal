@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - IT Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_login.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/website_logo.png') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Admin Login</h1>
+        </header>
+        <main>
+            <form id="login-form" method="POST" action="{{ url_for('admin_login') }}">
+                <div class="form-group">
+                    <!-- <label for="username" style="text-align: center;">Username</label> -->
+                    <input type="text" id="username" name="username" placeholder="Enter your username" style="text-align: center;" required>
+                </div>
+                <div class="form-group">
+                    <!-- <label for="password" style="text-align: center;">Password</label> -->
+                    <input type="password" id="password" name="password" placeholder="Enter your password" style="text-align: center;" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            {% if error %}
+            <p class="error">{{ error }}</p>
+            {% endif %}
+        </main>
+        <footer>
+            <p>&copy; 2024 IT Support Portal</p>
+        </footer>
+    </div>
+</body>
+</html>

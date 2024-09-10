@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Ticket - IT Support</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/website_logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='create_ticket.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Create New Ticket</h1>
+        </header>
+        <main>
+            <form id="create-ticket-form" class="form-container" method="POST" action="{{ url_for('create_ticket') }}">
+                <section>
+                    <h2 style="text-align: center;">Main Data Section</h2>
+                    <div class="form-group">
+                        <!-- <label for="applicant-name">Name of Applicant:</label> -->
+                        <input type="text" id="applicant-name" name="applicant_name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="job-title">Job Title:</label> -->
+                        <input type="text" id="job-title" name="job_title" placeholder="Enter your job title" required>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="phone">Phone/Ext:</label> -->
+                        <input type="text" id="phone" name="phone" placeholder="Enter your phone or Ext" required>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div> -->
+                    <div class="form-group">
+                        <!-- <label for="department">Department:</label> -->
+                        <select id="department" name="department" required>
+                            <option value="" disabled selected>Select your department</option>
+                            <option value="Production">Production</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="pet-eng">Petroleum Engineering</option>
+                            <option value="Administration">Administration</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Material">Material</option>
+                            <option value="Projects">Projects</option>
+                            <option value="Security">Security</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Hygiene">Hygiene</option>
+                            <option value="Camp Maintenance">Camp Maintenance</option>
+                            <option value="Camp Admin">Camp Admin</option>
+                            <option value="Field Manager">Field Manager</option>
+                            <option value="Safety">Safety</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Heavy Equipment">Heavy Equipment</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Production Accounting">Production Accounting</option>                            
+                        </select>
+                    </div>
+                </section>
+                <section>
+                    <h2 style="text-align: center;">Problem Information Section</h2>
+                    <div class="form-group">
+                        <!-- <label for="location">Location:</label> -->
+                        <select id="location" name="location" required>
+                            <option value="" disabled selected>Select location</option>
+                            <option value="K Administration Offices">K Administration Offices</option>
+                            <option value="Hana Administration Offices">Hana Administration Offices</option>
+                            <option value="Camp">Camp</option>
+                            <option value="H Station">H Station</option>
+                            <option value="K Station">K Station</option>
+                            <option value="Arta">Arta</option>
+                            <option value="Hosha">Hosha</option>
+                            <option value="NWG">NWG</option>
+                            <option value="Hana">Hana</option>
+                            <option value="Main Gate">Main Gate</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="problem-type">Problem Type:</label> -->
+                        <select id="problem-type" name="problem_type" required>
+                            <option value="" disabled selected>Select problem type</option>
+                            <option value="software">Software</option>
+                            <option value="pc">PC</option>
+                            <option value="network">Network</option>
+                            <option value="printer">Printer</option>
+                            <option value="ip-phone">IP Phone</option>
+                            <option value="tetra">Tetra</option>
+                            <option value="vhf">VHF</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="problem-description">Description of the Problem:</label> -->
+                        <textarea id="problem-description" name="problem_description" placeholder="Describe the problem" required></textarea>
+                    </div>
+                </section>
+                <button type="submit">Submit Ticket</button>
+            </form>
+        </main>
+        <footer>
+            <p>&copy; 2024 IT Support Portal</p>
+        </footer>
+    </div>
+</body>
+</html>

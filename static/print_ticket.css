@@ -1,0 +1,165 @@
+@page {
+    size: A4;
+    margin: 20mm;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+    background-color: #fff;
+    margin-right: 3%;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
+}
+
+header {
+    padding: 10px 0;
+    border-bottom: 1px solid #000;
+}
+
+header h1 {
+    font-size: 1.5em;
+    margin: 0;
+    font-weight: bold;
+}
+
+main {
+    padding: 10px;
+    text-align: left;
+}
+
+section {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+section h2 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 3px;
+}
+h2 {
+    text-align: center;
+}
+
+.detail-box {
+    padding: 6px;
+    /* background-color: #f9f9f9; */
+    border: 1px solid hsl(0, 0%, 87%);
+    border-radius: 6px;
+    
+}
+
+.detail {
+    padding: 3px 0;
+    font-size: 0.9em;
+}
+
+.radio-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+.signatures {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signature-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.signature {
+    width: 45%;
+    /* background-color: #f9f9f9; */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+.title {
+    padding: 6px 0;
+    font-size: 0.6em;
+    color: #666;
+    display: block;
+    /* margin-top: 20px; */
+    /* float: right */
+;}
+
+
+@media print {
+    @page {
+        size: A4;
+        margin: 2%;
+    }
+}
+/* 
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    header {
+        display: none;
+    }
+
+    main {
+        padding: 0;
+    }
+
+    section {
+        margin-bottom: 0;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+    }
+
+    .signature-box {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .signature {
+        width: 100%;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+    }
+
+    .title {
+        float: none;
+        text-align: right;
+    }
+} */

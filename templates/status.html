@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Status - IT Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='status.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/website_logo.png') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ticket Status</h1>
+        </header>
+        <main>
+            <section>
+                <div id="status-result" class="status-result">
+                    {% if ticket %}
+                        <h3 style="text-align: center;">Ticket ID: {{ ticket['Ticket ID'] }}</h3>
+                        <div class="ticket-details">
+                            <div class="detail status-{{ ticket['Status'] | lower }}"><strong>Status:</strong> {{ ticket['Status'] }}</div>
+                            {% if ticket['Report'] %}
+                                <div class="detail"><strong>Report:</strong> {{ ticket['Report'] }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="button-container">
+                            <a href="{{ url_for('print_ticket', ticket_id=ticket['Ticket ID']) }}" target="_blank" ><button>Print Ticket Details</button></a>
+                        </div>
+                    {% else %}
+                        <p style="text-align: center;">Ticket ID not found. Please check the ID and try again.</p>
+                    {% endif %}
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 IT Support Portal</p>
+        </footer>
+    </div>
+</body>
+</html>

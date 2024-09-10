@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Support Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/website_logo.png') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>IT Support Portal</h1>
+        </header>
+        <main>  
+            <section class="ticket-query">
+                <h2 style="text-align: center;">Query Ticket</h2>
+                <form id="query-form" action="{{ url_for('status') }}" method="GET">
+                    <input type="text" id="ticket-id" name="ticket_id" placeholder="Enter your ticket ID" required>
+                    <button type="submit">Query</button>
+                </form>
+            </section>
+            <section class="create-ticket">
+                <h2 style="text-align: center;">Create New Ticket</h2>
+                <button id="create-ticket-button">Create Ticket</button>
+            </section>
+            <section class="print-blank-form">
+                <h2 style="text-align: center;">Print Maintenance Request Form</h2>
+                <div class="button-container">
+                    <a href="{{ url_for('print_blank_ticket') }}" class="button">Print Blank Form</a>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 IT Support Portal</p>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('create-ticket-button').addEventListener('click', function() {
+            window.location.href = '{{ url_for("create_ticket") }}';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #405d72, #758694, #f7e7dc, #fff8f3);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 115vh;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+header {
+    padding: 20px 0;
+    background: linear-gradient(135deg, #405d72, #758694);
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+    font-weight: bold;
+    background: linear-gradient(90deg, #f7e7dc, #fff8f3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -ms-background-clip: text;
+    -o-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+main {
+    background: linear-gradient(135deg, #fff8f3, #f7e7dc);
+    padding: 20px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+    width: 100%;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    background: transparent;
+    font-size: 1em;
+    width: 94%;
+    transition: all 0.3s ease;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+input:focus {
+    border-bottom-color: #405d72;
+    outline: none;
+    box-shadow: none;
+}
+
+input::placeholder {
+    color: #908b8b;
+    text-align: center;
+}
+
+button {
+    background: linear-gradient(90deg, #405d72, #758694);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #758694, #f7e7dc);
+    box-shadow: 0 5px 15px rgba(64, 93, 114, 0.3);
+}
+
+input:focus::placeholder { 
+    color: transparent; 
+  }
+
+.error {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}

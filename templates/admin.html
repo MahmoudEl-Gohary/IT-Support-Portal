@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - IT Support</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/website_logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="view-toggle-icons">
+                <img src="{{ url_for('static', filename='img/list_icon.png') }}" alt="List View" onclick="toggleView('list')">
+                <img src="{{ url_for('static', filename='img/grid_icon.png') }}" alt="Grid View" onclick="toggleView('grid')">
+            </div>
+            <h1>Admin Dashboard</h1>
+            <a href="{{ url_for('admin_logout') }}" class="logout-button">Logout</a>
+        </header>
+        <main>
+            <section>
+                <div class="filter-bar">
+                    <select id="filter-location">
+                        <option value="">Filter by Location</option>
+                        {% for location in locations %}
+                        <option value="{{ location }}">{{ location }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="filter-status">
+                        <option value="">Filter by Status</option>
+                        <option value="on-hold">On-Hold</option>
+                        <option value="closed">Closed</option>
+                        <option value="dismissed">Dismissed</option>
+                        <option value="open">Open</option>
+                    </select>
+                    <select id="filter-department">
+                        <option value="">Filter by Department</option>
+                        {% for department in departments %}
+                        <option value="{{ department }}">{{ department }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="filter-problem-type">
+                        <option value="">Filter by Problem Type</option>
+                        {% for problem_type in problem_types %}
+                        <option value="{{ problem_type }}">{{ problem_type }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="date" id="filter-date">
+                    <button onclick="applyFilters()">Apply Filters</button>
+                    <button onclick="clearFilters()">Clear Filters</button>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Enter Ticket ID">
+                    <button onclick="searchTicket()">Search</button>
+                </div>
+                <div class="list-view {% if view != 'list' %}hidden{% endif %}">
+                    <table id="tickets-table">
+                        <thead>
+                            <tr>
+                                <th>Ticket ID</th>
+                                <th>Applicant Name</th>
+                                <th>Job Title</th>
+                                <th>Phone/Ext</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Problem Type</th>
+                                <th>Department</th>
+                                <th style="width:15%;">Description</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ticket in tickets %}
+                            <tr class="list-view status-{{ ticket['Status']|lower }}">
+                                <td>{{ ticket['Ticket ID'] }}</td>
+                                <td>{{ ticket['Applicant Name'] }}</td>
+                                <td>{{ ticket['Job Title'] }}</td>
+                                <td>{{ ticket['Phone/Ext'] }}</td>
+                                <td>{{ ticket['Date'] }}</td>
+                                <td>{{ ticket['Location'] }}</td>
+                                <td>{{ ticket['Problem Type'] }}</td>
+                                <td>{{ ticket['Department'] }}</td>
+                                <td>{{ ticket['Description'] }}</td>
+                                <td>{{ ticket['Status'] }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn-update" onclick="showStatusModal('{{ ticket['Ticket ID'] }}')">Update Status</button>
+                                        <button class="btn-report" onclick="showReportModal('{{ ticket['Ticket ID'] }}', '{{ ticket['Report'] }}')">Write Report</button>
+                                        <button class="btn-print" onclick="printTicket('{{ ticket['Ticket ID'] }}')">Print</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="grid-view {% if view != 'grid' %}hidden{% endif %}">
+                    {% for ticket in tickets %}
+                    <div class="ticket-card status-{{ ticket['Status']|lower }}">
+                        <h3>Ticket ID: {{ ticket['Ticket ID'] }}</h3>
+                        <p><strong>Applicant Name:</strong> {{ ticket['Applicant Name'] }}</p>
+                        <p><strong>Job Title:</strong> {{ ticket['Job Title'] }}</p>
+                        <p><strong>Phone/Ext:</strong> {{ ticket['Phone/Ext'] }}</p>
+                        <p><strong>Date:</strong> {{ ticket['Date'] }}</p>
+                        <p><strong>Location:</strong> {{ ticket['Location'] }}</p>
+                        <p><strong>Problem Type:</strong> {{ ticket['Problem Type'] }}</p>
+                        <p><strong>Department:</strong> {{ ticket['Department'] }}</p>
+                        <p><strong>Status:</strong> {{ ticket['Status'] }}</p>
+                        <p class="description"><strong>Description:</strong> {{ ticket['Description'] }}</p>
+                        <div class="btn-group">
+                            <button class="btn-update" onclick="showStatusModal('{{ ticket['Ticket ID'] }}')">Update Status</button>
+                            <button class="btn-report" onclick="showReportModal('{{ ticket['Ticket ID'] }}', '{{ ticket['Report'] }}')">Write Report</button>
+                            <button class="btn-print" onclick="printTicket('{{ ticket['Ticket ID'] }}')">Print</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 IT Support Portal</p>
+        </footer>
+    </div>
+
+    <div id="status-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeStatusModal()">&times;</span>
+            <h2>Update Status for Ticket ID: <span id="status-ticket-id-span"></span></h2>
+            <form id="status-form" method="POST" action="{{ url_for('update_status', view=view) }}">
+                <input type="hidden" id="status-modal-ticket-id" name="ticket_id">
+                <div class="form-group">
+                    <label for="status-select">Status:</label>
+                    <select id="status-select" name="status" required>
+                        <option value="on-hold">On-Hold</option>
+                        <option value="closed">Closed</option>
+                        <option value="dismissed">Dismissed</option>
+                        <option value="open">Open</option>
+                    </select>
+                </div>
+                <button type="submit">Update Status</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="report-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeReportModal()">&times;</span>
+            <h2>Write Report for Ticket ID: <span id="report-ticket-id-span"></span></h2>
+            <form id="report-form" method="POST" action="{{ url_for('write_report', view=view) }}">
+                <input type="hidden" id="report-modal-ticket-id" name="ticket_id">
+                <div class="form-group">
+                    <label for="report-text">Report:</label>
+                    <textarea id="report-text" name="report_text" placeholder="Write your report here..." required></textarea>
+                </div>
+                <button type="submit">Submit Report</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleView(view) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('view', view);
+            window.location.href = url.toString();
+        }
+
+        function showStatusModal(ticketId) {
+            document.getElementById('status-modal').style.display = 'block';
+            document.getElementById('status-ticket-id-span').innerText = ticketId;
+            document.getElementById('status-modal-ticket-id').value = ticketId;
+        }
+
+        function closeStatusModal() {
+            document.getElementById('status-modal').style.display = 'none';
+        }
+
+        function showReportModal(ticketId, report) {
+            document.getElementById('report-modal').style.display = 'block';
+            document.getElementById('report-ticket-id-span').innerText = ticketId;
+            document.getElementById('report-modal-ticket-id').value = ticketId;
+            document.getElementById('report-text').value = report;
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        function searchTicket() {
+            const searchInput = document.getElementById('search-input').value;
+            const url = new URL(window.location.href);
+            url.searchParams.set('search', searchInput);
+            window.location.href = url.toString();
+        }
+
+        function applyFilters() {
+            const location = document.getElementById('filter-location').value;
+            const status = document.getElementById('filter-status').value;
+            const department = document.getElementById('filter-department').value;
+            const problemType = document.getElementById('filter-problem-type').value;
+            const date = document.getElementById('filter-date').value;
+            const url = new URL(window.location.href);
+            if (location) {
+                url.searchParams.set('location', location);
+            }
+            if (status) {
+                url.searchParams.set('status', status);
+            }
+            if (department) {
+                url.searchParams.set('department', department);
+            }
+            if (problemType) {
+                url.searchParams.set('problem_type', problemType);
+            }
+            if (date) {
+                url.searchParams.set('date', date);
+            }
+            window.location.href = url.toString();
+        }
+
+        function clearFilters() {
+            const url = new URL(window.location.href);
+            url.searchParams.delete('location');
+            url.searchParams.delete('status');
+            url.searchParams.delete('department');
+            url.searchParams.delete('problem_type');
+            url.searchParams.delete('date');
+            window.location.href = url.toString();
+        }
+
+        function printTicket(ticketId) {
+            const url = "{{ url_for('print_ticket', ticket_id='TICKET_ID') }}".replace('TICKET_ID', ticketId);
+            window.open(url, '_blank');
+        }
+
+        // Close the modals when clicking outside of them
+        window.onclick = function(event) {
+            var statusModal = document.getElementById('status-modal');
+            var reportModal = document.getElementById('report-modal');
+            if (event.target == statusModal) {
+                statusModal.style.display = 'none';
+            }
+            if (event.target == reportModal) {
+                reportModal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+
