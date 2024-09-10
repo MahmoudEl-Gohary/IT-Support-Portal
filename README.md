@@ -47,7 +47,7 @@ IT-Support-Portal/
 ### Prerequisites
 
 - **Python 3.x** installed on your machine.
-- **Flask** or any required dependencies listed in `requirements.txt` (if applicable).
+- **Flask** or any required dependencies.
 
 ### Steps
 
